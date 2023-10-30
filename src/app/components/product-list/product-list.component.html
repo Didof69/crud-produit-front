@@ -1,1 +1,16 @@
-<app-product-card></app-product-card>
+<div class="container-fluid">
+  <div class="d-flex">
+    <h1>Liste des Produits en stock</h1>
+    <button routerLink="/product/create" class="btn btn-primary">
+      Ajouter un produit
+    </button>
+  </div>
+
+  <div class="d-flex flex-wrap">
+    <app-product-card
+    *ngFor="let product of productsTab"
+    [product]="product"
+  ></app-product-card> 
+  </div>
+ 
+</div>
