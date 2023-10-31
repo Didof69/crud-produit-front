@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -27,7 +27,7 @@ export class LoginComponent {
       this.userService.login(this.user).subscribe({
         next: (response) => {
           sessionStorage.setItem('token', response.accessToken);
-           this.router.navigate(['home']);
+          this.router.navigate(['home']);
         },
         error: (error) => {
           this.connexionKO = true;

@@ -5,14 +5,12 @@ import { ProductCreateComponent } from './components/product-create/product-crea
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: PageHomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'product/create', component: ProductCreateComponent },
-  { path: 'product/delete/:id', component: ProductDeleteComponent },
   { path: 'product/update/:id', component: ProductUpdateComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

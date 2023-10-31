@@ -1,7 +1,7 @@
 <div class="container-fluid">
-  <div class="d-flex">
+  <div class="d-flex title-zone justify-content-between">
     <h1>Liste des Produits en stock</h1>
-    <button routerLink="/product/create" class="btn btn-primary">
+    <button *ngIf="isLog" routerLink="/product/create" class="btn btn-primary">
       Ajouter un produit
     </button>
   </div>

@@ -8,4 +8,10 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductListComponent {
   @Input() productsTab!: Product[];
+  isLog = false;
+  ngOnInit() {
+    if (sessionStorage.getItem('token')) {
+      this.isLog = true;
+    }
+  }
 }

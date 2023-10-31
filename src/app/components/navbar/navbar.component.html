@@ -1,8 +1,7 @@
 <nav class="navbar bg-light sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="home">CRUD Product</a>
-    <a class="d-flex" routerLink="login">
-      Se connecter
-    </a>
+    <a class="navbar-brand" routerLink="/home">CRUD Product</a>
+    <button *ngIf="!isLog" class="btn btn-primary d-flex" routerLink="/login"> Se connecter </button>
+    <button *ngIf="isLog" class="btn btn-danger d-flex" (click)="onDeconnexion()"> Se déconnecter </button>
   </div>
 </nav>

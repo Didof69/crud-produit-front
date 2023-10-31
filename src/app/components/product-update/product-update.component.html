@@ -1,1 +1,124 @@
-<p>product-update works!</p>
+<div class="container card">
+  <p class="text-center">Modifier le produit {{ product.product_name }}</p>
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group d-flex flex-column">
+      <label for="product_name">Nom : </label>
+      <input id="product_name" type="text" formControlName="product_name" />
+    </div>
+
+    <div class="form-group d-flex flex-column">
+      <label for="category_id">Categorie : </label>
+      <select formControlName="category_id">
+        <option
+          *ngFor="let category of categoriesTab"
+          [ngValue]="category.category_id"
+          [attr.selected]="
+            category.category_id === product.category_id ? true : null
+          "
+        >
+          {{ category.category_name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group d-flex flex-column">
+      <label for="price">Prix : </label>
+      <input
+        id="price"
+        type="number"
+        min="0.01"
+        max="99999.99"
+        formControlName="price"
+        [class.input-error]="!updateForm.controls['price'].valid"
+      />
+      <div class="alert" *ngIf="!updateForm.controls['price'].valid">
+        <span >
+           Veuillez entrer un prix entre 0.01€ et 99999,99€.
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group d-flex flex-column">
+      <label for="quantity">Quantité : </label>
+      <input
+        id="quantity"
+        type="number"
+        min="1"
+        step="1"
+        formControlName="quantity"
+        [class.input-error]="!updateForm.controls['quantity'].valid"
+      />
+      <div class="alert" *ngIf="!updateForm.controls['quantity'].valid">
+        <span >Veuillez entrer un nombre entier.</span>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-around btn-zone">
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!updateForm.valid"
+        data-bs-toggle="modal"
+        data-bs-target="#updateModal"
+      >
+        Modifier
+      </button>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="updateModal"
+        tabindex="-1"
+        aria-labelledby="updateModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="modal-title fs-5" id="updateModalLabel">
+                {{ updateForm.value.product_name }}
+              </p>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div *ngFor="let category of categoriesTab">
+                <p
+                  *ngIf="updateForm.value.category_id === category.category_id"
+                >
+                  Catégorie : {{ category.category_name }}
+                </p>
+              </div>
+              <p>Prix : {{ updateForm.value.price }}€</p>
+              <p>Quantité : {{ updateForm.value.quantity }}</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fermer
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Confirmer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-danger" routerLink="/home">
+        Annuler
+      </button>
+    </div>
+    <!-- {{updateForm.controls['price'].valid | json}} -->
+  </form>
+</div>
