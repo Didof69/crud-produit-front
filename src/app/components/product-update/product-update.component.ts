@@ -26,6 +26,7 @@ export class ProductUpdateComponent {
   };
 
   updateForm!: FormGroup;
+  //initialisation des regex pour Validators
   patternPrice = '^([0-9])+(.[0-9]{1,2})?$';
   patternQuantity = '^[0-9]*[1-9][0-9]*$';
 
@@ -51,37 +52,36 @@ export class ProductUpdateComponent {
   }
 
   ngOnInit() {
+    //protection de la route
     if (!sessionStorage.getItem('token')) {
       this.router.navigate(['/login']);
     }
 
     const productIdFromRoute = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(productIdFromRoute);
 
     this.categoryService.getAllCategories().subscribe((categories) => {
       this.categoriesTab = categories;
-      console.log(this.categoriesTab);
     });
 
-    this.productService
-      .getOneProductById(productIdFromRoute)
-      .subscribe((product) => {
+    this.productService.getOneProductById(productIdFromRoute).subscribe({
+      next: (product) => {
         this.product = product;
-        // console.log(this.product);
         this.updateForm.patchValue({
           product_name: this.product.product_name,
           category_id: this.product.category_id,
           price: this.product.price,
           quantity: this.product.quantity,
         });
-      });
+      },
+      error: (error) => {
+        alert(error);
+      },
+    });
   }
 
   onSubmit() {
-    console.log(this.updateForm.value);
-    
     if (this.updateForm.valid) {
-      this.updateForm.value.price = this.updateForm.value.price.toString()
+      this.updateForm.value.price = this.updateForm.value.price.toString();
       this.productService
         .updateProduct(this.product.product_id!, this.updateForm.value)
         .subscribe({
@@ -89,7 +89,7 @@ export class ProductUpdateComponent {
             this.router.navigate(['home']);
           },
           error: (error) => {
-            console.log(error);
+            alert(error);
           },
         });
     }

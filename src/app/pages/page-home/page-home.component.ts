@@ -11,16 +11,23 @@ export class PageHomeComponent {
   productsTab!: Product[];
   isLog = false;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,) { }
   
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((products) => {
-      this.productsTab = [...products];
-      console.log(this.productsTab);
-    });
 
     if (sessionStorage.getItem('isLog') == 'true') {
      this.isLog=true ;
     }
+    this.productService.getAllProducts().subscribe({
+      next: (products) => {
+        this.productsTab = [...products];
+        console.log(this.productsTab);
+      },
+      error: (error) => { 
+        alert(error)
+      },
+    })
+
+    
   }
 }

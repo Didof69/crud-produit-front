@@ -1,14 +1,14 @@
 <div class="card" style="width: 18rem; height: 15rem">
   <div class="card-body d-flex flex-column justify-content-around">
     <div>
-    <h5 class="card-title">{{product.product_name}}</h5>
-    <p class="card-text">Catégorie : {{product.category.category_name}}</p></div>
+      <h5 class="card-title">{{product.product_name}}</h5>
+      <p class="card-text">Catégorie : {{product.category.category_name}}</p></div>
     <div>
       <h6 class="card-subtitle">Prix : {{product.price}} €</h6>
-    <p class="card-text">Quantité en stock : {{product.quantity}}</p>  
+      <p class="card-text">Quantité en stock : {{product.quantity}}</p>  
     </div>
   <div *ngIf="isLog" class="d-flex justify-content-between"> 
-        <button type="submit" class="btn btn-primary" [routerLink]="['/product/update/',product.product_id]">Editer</button>
+    <button type="submit" class="btn btn-primary" [routerLink]="['/product/update/',product.product_id]">Editer</button>
     <button type="submit" class="btn btn-danger" [routerLink]="['/product/delete/',product.product_id]">Supprimer</button>
   </div>
 

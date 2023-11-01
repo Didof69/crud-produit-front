@@ -14,9 +14,9 @@ export class ProductCreateComponent {
   categoriesTab!: Category[];
 
   createForm!: FormGroup;
+  //initialisation des regex pour Validators
   patternPrice = '^([0-9])+(.[0-9]{1,2})?$';
   patternQuantity = '^[0-9]*[1-9][0-9]*$';
-
 
   constructor(
     private categoryService: CategoryService,
@@ -25,6 +25,7 @@ export class ProductCreateComponent {
     private router: Router,
     private fb: FormBuilder
   ) {
+    //initialisation du formulaire
     this.createForm = this.fb.group({
       product_name: ["", Validators.required],
       category_id: ["", Validators.required],
@@ -40,22 +41,19 @@ export class ProductCreateComponent {
   }
 
   ngOnInit() {
+    //protection de la route
     if (!sessionStorage.getItem('token')) {
       this.router.navigate(['/login']);
     }
 
     const productIdFromRoute = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(productIdFromRoute);
 
     this.categoryService.getAllCategories().subscribe((categories) => {
       this.categoriesTab = categories;
-      console.log(this.categoriesTab);
     });
   }
 
   onSubmit() {
-    console.log(this.createForm.value);
-
     if (this.createForm.valid) {
       this.createForm.value.price = this.createForm.value.price.toString();
       this.productService
@@ -65,7 +63,7 @@ export class ProductCreateComponent {
             this.router.navigate(['home']);
           },
           error: (error) => {
-            console.log(error);
+            alert(error);
           },
         });
     }

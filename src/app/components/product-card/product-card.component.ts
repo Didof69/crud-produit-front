@@ -8,11 +8,11 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
+  //initialisation de l'état de la connexion
   isLog = false;
   
   ngOnInit() {
-    if (sessionStorage.getItem('token')) {
-      this.isLog = true;
-    }   
+    //vérifie si l'on possède un token
+    if (sessionStorage.getItem('token')) { this.isLog = true };
   }
 }

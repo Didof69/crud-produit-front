@@ -27,6 +27,7 @@ export class ProductDeleteComponent {
   ) {}
 
   ngOnInit() {
+    //protection de la route
     if (!sessionStorage.getItem('token')) {
       this.router.navigate(['/login']);
     }
@@ -40,8 +41,13 @@ export class ProductDeleteComponent {
   }
 
   onSubmit() {
-    this.productService.deleteProduct(this.product.product_id!).subscribe((reponse) => {
-      this.router.navigate(['home'])
-    })
+    this.productService.deleteProduct(this.product.product_id!).subscribe({
+      next: (response) => {
+        this.router.navigate(['home']);
+      },
+      error: (error) => {
+        alert(error);
+      },
+    });
   }
 }

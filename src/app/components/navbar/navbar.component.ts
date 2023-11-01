@@ -7,18 +7,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  isLog = false
+  //initialisation de l'état de la connexion
+  isLog!: boolean;
   
   constructor(private userService: UserService) { }
   
   ngOnInit() {
-    this.userService.userStatusEmitter.subscribe((data) => {
-    this.isLog = data
-  })
+    this.userService.userStatusEmitter.subscribe((data) => this.isLog = data)
+    //récupération de l'état de la connexion auprès du Subject dans userService
   }
   
+  //déconnecte et efface le token
   onDeconnexion() {
     sessionStorage.clear();
+    this.isLog=false
+    this.userService.userStatusEmitterEvent(this.isLog)
     location.reload();
   }
 }
