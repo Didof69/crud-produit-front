@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,11 +7,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  isLog=false
+  isLog = false
+  
+  constructor(private userService: UserService) { }
+  
   ngOnInit() {
-    if (sessionStorage.getItem('token')) {
-    this.isLog=true
-  }
+    this.userService.userStatusEmitter.subscribe((data) => {
+    this.isLog = data
+  })
   }
   
   onDeconnexion() {

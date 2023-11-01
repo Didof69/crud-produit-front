@@ -17,6 +17,7 @@ export class ProductCreateComponent {
   patternPrice = '^([0-9])+(.[0-9]{1,2})?$';
   patternQuantity = '^[0-9]*[1-9][0-9]*$';
 
+
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,

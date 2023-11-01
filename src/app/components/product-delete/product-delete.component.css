@@ -1,0 +1,24 @@
+.container {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-top: 2rem;
+    width: 40vw;
+    padding: 30px;
+}
+
+.btn {
+    margin: 20px;
+}
+
+.btn-zone {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 48rem) {
+.container{
+    width: 80vw;;
+}
+
+}

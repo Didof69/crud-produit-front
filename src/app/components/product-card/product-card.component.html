@@ -9,23 +9,7 @@
     </div>
   <div *ngIf="isLog" class="d-flex justify-content-between"> 
         <button type="submit" class="btn btn-primary" [routerLink]="['/product/update/',product.product_id]">Editer</button>
-    <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" >Supprimer</button>
-
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteModalLabel">Suppression du produit {{product.product_name}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="onSubmit()">Confirmer</button>
-      </div>
-    </div>
-  </div>
-</div>
+    <button type="submit" class="btn btn-danger" [routerLink]="['/product/delete/',product.product_id]">Supprimer</button>
   </div>
 
   </div>

@@ -1,3 +1,19 @@
-.title-zone{
+.title-zone {
     margin: 10px;
+}
+ 
+.btn-add{
+   height: 38px; 
+}
+
+.list{
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 48rem) {
+    .list {
+      justify-content: center;
+    }
+
 }

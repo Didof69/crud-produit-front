@@ -17,6 +17,7 @@ export class LoginComponent {
 
   isFormValidate = false;
   connexionKO = false;
+  isLog: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -28,11 +29,15 @@ export class LoginComponent {
         next: (response) => {
           sessionStorage.setItem('token', response.accessToken);
           this.router.navigate(['home']);
+          this.isLog = true;
+          this.userService.userStatusEmitterEvent(this.isLog)
         },
         error: (error) => {
           this.connexionKO = true;
         },
       });
+
+      
     }
   }
 }
