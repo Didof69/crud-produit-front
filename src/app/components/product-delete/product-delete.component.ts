@@ -45,7 +45,7 @@ export class ProductDeleteComponent {
       next: (response) => {
         this.router.navigate(['home']);
       },
-      error: (error) => {
+      error: (error) => {        
         alert(error);
       },
     });

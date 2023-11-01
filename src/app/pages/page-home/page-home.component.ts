@@ -24,10 +24,8 @@ export class PageHomeComponent {
         console.log(this.productsTab);
       },
       error: (error) => { 
-        alert(error)
+        alert("La base de doonées n'est pas accessible")
       },
-    })
-
-    
+    })    
   }
 }
